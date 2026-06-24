@@ -106,10 +106,11 @@ header {
 /* Após sair do vídeo: azul sólido */
 header.header-solid {
     padding: 12px 0;
-    background: var(--primary-blue);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: rgba(18, 18, 20, 0.95);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav-container {
@@ -127,6 +128,7 @@ header.header-solid {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #ffffff;
 }
 
 .logo-image {
@@ -148,6 +150,19 @@ header.header-solid {
     font-weight: 600;
     position: relative;
     transition: var(--transition-smooth);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.nav-links li a:hover {
+    color: #ffffff;
+}
+
+.nav-links li a.active-link {
+    color: var(--primary-blue) !important;
+}
+
+.nav-links li a.active-link::after {
+    width: 100%;
 }
 
 .nav-links li a::after {
@@ -181,8 +196,20 @@ header.header-solid {
 }
 
 /* =========================================
-   Hero Section (Parallax Video)
+   Hero Section (Animated Abstract CSS)
    ========================================= */
+.parallax-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    will-change: transform;
+    transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 .parallax-hero {
     position: relative;
     height: 100vh;
@@ -191,21 +218,253 @@ header.header-solid {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000;
+    background-color: #0b0c10;
 }
 
-#hero-video {
+/* Efeito de auras luminosas se movendo lentamente */
+.hero-glow-1 {
+    position: absolute;
+    top: -15%;
+    left: -10%;
+    width: 65%;
+    height: 65%;
+    background: radial-gradient(circle, rgba(41, 182, 232, 0.22) 0%, rgba(41, 182, 232, 0) 70%);
+    filter: blur(120px);
+    z-index: 1;
+    animation: glowMove1 22s infinite alternate ease-in-out;
+}
+
+.hero-glow-2 {
+    position: absolute;
+    bottom: -15%;
+    right: -10%;
+    width: 65%;
+    height: 65%;
+    background: radial-gradient(circle, rgba(26, 154, 200, 0.18) 0%, rgba(26, 154, 200, 0) 70%);
+    filter: blur(120px);
+    z-index: 1;
+    animation: glowMove2 28s infinite alternate ease-in-out;
+}
+
+/* Efeito de estrelas / partículas flutuantes puramente com CSS */
+.hero-stars-1, .hero-stars-2 {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     z-index: 1;
-    transition: opacity 1s ease-in-out;
-    /* Garante que transform-origin esteja centrado para não cortar o vídeo */
-    transform-origin: center center;
-    will-change: transform, opacity;
+    pointer-events: none;
+}
+
+.hero-stars-1::after {
+    content: "";
+    position: absolute;
+    width: 1.5px;
+    height: 1.5px;
+    background: transparent;
+    box-shadow: 
+        120px 240px rgba(255, 255, 255, 0.4),
+        350px 520px rgba(41, 182, 232, 0.5),
+        720px 150px rgba(255, 255, 255, 0.3),
+        910px 620px rgba(255, 255, 255, 0.6),
+        250px 710px rgba(41, 182, 232, 0.4),
+        620px 330px rgba(255, 255, 255, 0.2),
+        1120px 240px rgba(255, 255, 255, 0.5),
+        1350px 420px rgba(41, 182, 232, 0.6),
+        420px 180px rgba(255, 255, 255, 0.3),
+        820px 730px rgba(255, 255, 255, 0.4),
+        1220px 670px rgba(41, 182, 232, 0.5),
+        1420px 180px rgba(255, 255, 255, 0.3),
+        80px 480px rgba(255, 255, 255, 0.4),
+        520px 820px rgba(255, 255, 255, 0.5),
+        970px 380px rgba(41, 182, 232, 0.4);
+    animation: starsScroll 80s infinite linear;
+}
+
+.hero-stars-2::after {
+    content: "";
+    position: absolute;
+    width: 2.5px;
+    height: 2.5px;
+    background: transparent;
+    box-shadow: 
+        200px 100px rgba(255, 255, 255, 0.5),
+        450px 300px rgba(41, 182, 232, 0.7),
+        850px 500px rgba(255, 255, 255, 0.4),
+        1050px 150px rgba(255, 255, 255, 0.6),
+        150px 600px rgba(41, 182, 232, 0.5),
+        550px 700px rgba(255, 255, 255, 0.3),
+        1250px 350px rgba(255, 255, 255, 0.6),
+        1400px 550px rgba(41, 182, 232, 0.7),
+        300px 400px rgba(255, 255, 255, 0.4),
+        700px 200px rgba(255, 255, 255, 0.5),
+        1100px 600px rgba(41, 182, 232, 0.6),
+        1300px 750px rgba(255, 255, 255, 0.4);
+    animation: starsScroll 140s infinite linear;
+}
+
+@keyframes starsScroll {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-1000px);
+    }
+}
+
+/* Estilos para circuitos eletrônicos integrados */
+.hero-circuits {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.75;
+}
+
+.circuit-line {
+    fill: none;
+    stroke: rgba(41, 182, 232, 0.08);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.circuit-line.line-1,
+.circuit-line.line-2,
+.circuit-line.line-3,
+.circuit-line.line-4 {
+    stroke-dasharray: 80 800;
+    stroke-dashoffset: 880;
+    animation: circuitFlow 12s infinite linear;
+}
+
+.circuit-line.line-1 { animation-delay: 0s; stroke: rgba(41, 182, 232, 0.45); }
+.circuit-line.line-2 { animation-delay: 3s; stroke: rgba(91, 192, 235, 0.4); }
+.circuit-line.line-3 { animation-delay: 6s; stroke: rgba(41, 182, 232, 0.45); }
+.circuit-line.line-4 { animation-delay: 9s; stroke: rgba(26, 154, 200, 0.35); }
+
+@keyframes circuitFlow {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.circuit-node {
+    fill: rgba(41, 182, 232, 0.3);
+    animation: nodePulse 3s infinite ease-in-out alternate;
+}
+
+.node-2 { animation-delay: 1s; }
+.node-3 { animation-delay: 2s; }
+.node-4 { animation-delay: 1.5s; }
+.node-5 { animation-delay: 0.5s; }
+
+@keyframes nodePulse {
+    0% {
+        r: 3px;
+        fill: rgba(26, 154, 200, 0.4);
+        opacity: 0.6;
+    }
+    100% {
+        r: 5px;
+        fill: rgba(41, 182, 232, 0.95);
+        opacity: 1;
+        filter: drop-shadow(0 0 5px rgba(41, 182, 232, 0.8));
+    }
+}
+
+/* Grade tecnológica sutil */
+.hero-grid-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center center;
+    z-index: 2;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+}
+
+/* Elementos flutuantes abstratos (Efeito Vidro/Glassmorphism) */
+.hero-floating-shape {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(41, 182, 232, 0.12);
+    background: rgba(255, 255, 255, 0.005);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2;
+}
+
+.shape-1 {
+    width: 160px;
+    height: 160px;
+    top: 15%;
+    left: 10%;
+    animation: floatSlow 20s infinite ease-in-out;
+}
+
+.shape-2 {
+    width: 280px;
+    height: 280px;
+    bottom: 10%;
+    right: 8%;
+    animation: floatSlow 25s infinite ease-in-out reverse;
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; /* Formato orgânico */
+}
+
+.shape-3 {
+    width: 90px;
+    height: 90px;
+    top: 55%;
+    left: 5%;
+    animation: floatSlow 15s infinite ease-in-out 3s;
+}
+
+/* Animações */
+@keyframes floatSlow {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(-25px) rotate(180deg) scale(1.05);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg) scale(1);
+    }
+}
+
+@keyframes glowMove1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(80px, -40px) scale(1.15);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes glowMove2 {
+    0% {
+        transform: translate(0, 0) scale(1.15);
+    }
+    50% {
+        transform: translate(-80px, 40px) scale(0.95);
+    }
+    100% {
+        transform: translate(0, 0) scale(1.15);
+    }
 }
 
 .video-overlay-gradient {
@@ -286,17 +545,40 @@ header.header-solid {
 }
 
 .bento-card {
-    background: var(--bg-white);
+    background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(41, 182, 232, 0.25), rgba(0, 0, 0, 0.05)) border-box;
+    border: 1px solid transparent;
     border-radius: 32px;
     padding: 40px;
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    transition: var(--transition-smooth);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.bento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(41, 182, 232, 0.05),
+        transparent 80%
+    );
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.bento-card:hover::before {
+    opacity: 1;
 }
 
 .bento-card:hover {
@@ -588,20 +870,7 @@ footer {
         font-size: 2.5rem;
     }
 
-    /* Mobile: desativa parallax e garante vídeo no fundo sem bugs */
     .parallax-hero {
         height: 100svh;
-        /* svh respeita a barra do navegador no iOS */
-    }
-
-    #hero-video {
-        /* No mobile, fixa o vídeo centralizado sem transform */
-        top: 50%;
-        left: 50%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        transform: translate(-50%, -50%) !important;
     }
 }
