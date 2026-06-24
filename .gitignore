@@ -1,0 +1,13 @@
+# Arquivos de mídia grandes (opcional despausar se quiser subir ao GitHub sem mídias)
+# *.mp4
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+
+# Sistema / IDEs
+.DS_Store
+Thumbs.db
+.vs/
+.vscode/
+node_modules/
