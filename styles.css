@@ -221,6 +221,19 @@ header.header-solid {
     background-color: #0b0c10;
 }
 
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 1; /* Exibe o vídeo em sua nitidez original de 100% */
+}
+
 /* Efeito de auras luminosas se movendo lentamente */
 .hero-glow-1 {
     position: absolute;
