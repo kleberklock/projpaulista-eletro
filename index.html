@@ -2,6 +2,27 @@
 <html lang="pt-BR">
 
 <head>
+    <!-- Google tag (gtag.js) - Google Ads -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11337477990"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-11337477990');
+    </script>
+
+    <!-- Conversão: clique no WhatsApp -->
+    <script>
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href^="whatsapp:"]');
+        if (!link) return;
+        gtag('event', 'conversion', {
+          'send_to': 'AW-11337477990/eGfTCPrwv6odEObekJ4q',
+          'transport_type': 'beacon'
+        });
+      }, true);
+    </script>
+
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
                 'gtm.start':
